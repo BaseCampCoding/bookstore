@@ -9,6 +9,7 @@ pillow = "*"
 "psycopg2-binary" = "*"
 
 [dev-packages]
+selenium = "*"
 
 [requires]
 python_version = "3.6"
