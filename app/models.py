@@ -8,6 +8,7 @@ class Author(models.Model):
 
     class Meta:
         default_related_name = 'authors'
+        ordering = ['id']
 
     def __str__(self):
         return self.name
@@ -43,6 +44,7 @@ class Book(models.Model):
 
     class Meta:
         default_related_name = 'books'
+        ordering = ['id']
 
     def __str__(self):
         return f"{self.title} by {', '.join(a.name for a in self.authors.all())}"
