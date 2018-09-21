@@ -1,5 +1,5 @@
 from django import views
-from django.views.decorators.cache import cache_page
+from django.urls import reverse
 from app import models
 
 
@@ -30,6 +30,9 @@ class BookCreate(views.generic.CreateView):
     template_name = 'book/create.html'
     fields = ['title', 'authors', 'price', 'cover_image', 'description']
 
+    def get_success_url(self):
+        return reverse('book-detail', args=[self.object.id])
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['authors'] = models.Author.objects.all()
@@ -40,6 +43,9 @@ class BookUpdate(views.generic.UpdateView):
     model = models.Book
     template_name = 'book/update.html'
     fields = ['title', 'authors', 'price', 'cover_image', 'description']
+
+    def get_success_url(self):
+        return reverse('book-detail', args=[self.object.id])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -65,8 +71,14 @@ class AuthorCreate(views.generic.CreateView):
     template_name = 'author/create.html'
     fields = ['name']
 
+    def get_success_url(self):
+        return reverse('author-detail', args=[self.object.id])
+
 
 class AuthorUpdate(views.generic.UpdateView):
     model = models.Author
     template_name = 'author/update.html'
     fields = ['name']
+
+    def get_success_url(self):
+        return reverse('author-detail', args=[self.object.id])

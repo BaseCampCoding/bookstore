@@ -13,9 +13,6 @@ class Author(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse('author-detail', args=[self.id])
-
 
 class BookManager(models.Manager):
     pass
@@ -48,9 +45,6 @@ class Book(models.Model):
 
     def __str__(self):
         return f"{self.title} by {', '.join(a.name for a in self.authors.all())}"
-
-    def get_absolute_url(self):
-        return reverse('book-detail', args=[self.id])
 
     def authors_ids(self):
         return self.authors.all().values_list('id', flat=True)
