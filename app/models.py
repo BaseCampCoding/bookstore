@@ -13,6 +13,9 @@ class Author(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        raise RuntimeError('get_absolute_url is gone now =). Use the {% url ... %} template tag.')
+
 
 class BookManager(models.Manager):
     pass
@@ -45,6 +48,9 @@ class Book(models.Model):
 
     def __str__(self):
         return f"{self.title} by {', '.join(a.name for a in self.authors.all())}"
+
+    def get_absolute_url(self):
+        raise RuntimeError('get_absolute_url is gone now =). Use the {% url ... %} template tag.')
 
     def authors_ids(self):
         return self.authors.all().values_list('id', flat=True)
